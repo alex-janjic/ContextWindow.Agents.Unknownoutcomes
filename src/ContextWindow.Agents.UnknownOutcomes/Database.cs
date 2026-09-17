@@ -5,7 +5,9 @@ internal static class Database
 {
     internal static async Task<NpgsqlConnection> OpenAsync()
     {
-        var value = Environment.GetEnvironmentVariable("CW_POSTGRES") ?? throw new InvalidOperationException("Set CW_POSTGRES to a disposable PostgreSQL database.");
+        var value = Environment.GetEnvironmentVariable("CW_POSTGRES");
+        if (string.IsNullOrWhiteSpace(value))
+            throw new InvalidOperationException("Set CW_POSTGRES to a disposable PostgreSQL database.");
         var builder = new NpgsqlConnectionStringBuilder(value) { CommandTimeout = 30, Timeout = 10, IncludeErrorDetail = false };
         var connection = new NpgsqlConnection(builder.ConnectionString);
         await connection.OpenAsync();

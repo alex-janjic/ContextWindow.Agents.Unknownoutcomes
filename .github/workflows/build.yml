@@ -5,8 +5,22 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18.1
+        env:
+          POSTGRES_USER: fixture
+          POSTGRES_PASSWORD: fixture
+          POSTGRES_DB: contextwindow
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U fixture -d contextwindow"
+          --health-interval 2s
+          --health-timeout 2s
+          --health-retries 30
     env:
-      CW_POSTGRES: ${{ secrets.CW_POSTGRES }}
+      CW_POSTGRES: Host=localhost;Port=5432;Database=contextwindow;Username=fixture;Password=fixture
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
