@@ -17,7 +17,7 @@ var result = await RefundTool.RunAsync(client, executor, write, Capability.Looku
 
 ## Requirements and run
 
-.NET 10 SDK, PostgreSQL 18, loopback TCP access, permission to spawn/kill child processes. Pinned direct dependencies are in Directory.Packages.props (Npgsql, Microsoft Agent Framework, xUnit and test tooling). The Agent Framework version is a pinned preview; review adapter API changes before upgrading. No provider credentials. `CW_POSTGRES` is the only connection setting; set it through the environment to a disposable existing database. Never use a production database. SQL command timeout is 30 seconds; HTTP timeout is 5 seconds; child waits are 30 seconds.
+.NET 10 SDK, PostgreSQL 18, loopback TCP access, permission to spawn/kill child processes. Pinned direct dependencies are in Directory.Packages.props (Npgsql, Microsoft Agent Framework, xUnit and test tooling). The Agent Framework version is pinned; review adapter API changes before upgrading. No provider credentials. `CW_POSTGRES` is the only connection setting; set it through the environment to a disposable existing database. Never use a production database. SQL command timeout is 30 seconds; HTTP timeout is 5 seconds; child waits are 30 seconds.
 
 ```text
 dotnet restore tests/ContextWindow.Agents.UnknownOutcomes.Tests/ContextWindow.Agents.UnknownOutcomes.Tests.csproj
