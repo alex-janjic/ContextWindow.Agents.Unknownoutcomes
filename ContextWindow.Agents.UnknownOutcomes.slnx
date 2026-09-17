@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ContextWindow.Agents.UnknownOutcomes/ContextWindow.Agents.UnknownOutcomes.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ContextWindow.Agents.UnknownOutcomes.Tests/ContextWindow.Agents.UnknownOutcomes.Tests.csproj" />
+  </Folder>
+</Solution>

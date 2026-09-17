@@ -1,0 +1,18 @@
+name: build
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      CW_POSTGRES: ${{ secrets.CW_POSTGRES }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Test against dedicated disposable PostgreSQL
+        run: dotnet test ContextWindow.Agents.UnknownOutcomes.slnx --configuration Release
+      - name: Pack
+        run: dotnet pack src/ContextWindow.Agents.UnknownOutcomes --configuration Release

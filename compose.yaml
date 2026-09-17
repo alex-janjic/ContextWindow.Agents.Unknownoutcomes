@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:18.1
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?set disposable database user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set disposable database password}
+      POSTGRES_DB: ${POSTGRES_DB:?set disposable database name}
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 2s
+      timeout: 2s
+      retries: 30
+  fixture:
+    build: .
+    environment:
+      CW_POSTGRES: ${CW_POSTGRES:?set disposable compose database connection}
+    depends_on:
+      postgres:
+        condition: service_healthy
